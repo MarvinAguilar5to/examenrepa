@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adidas | Kick House</title>
+    <link rel="stylesheet" href="2estilos.css">
+</head>
+<body>
+
+    <nav class="menu-productos">
+        <a href="productos.html" class="nav-left">← PRODUCTOS</a>
+        
+        <!-- Botón Hamburguesa -->
+        <button class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-right" id="nav-menu">
+            <a href="#futbol">FÚTBOL</a>
+            <a href="#casual">CASUAL</a>
+        </div>
+    </nav>
+
+    <header class="header-marca">
+        <h1>ADIDAS <span>COLLECTION</span></h1>
+    </header>
+
+    <!-- SECCIÓN FÚTBOL -->
+    <section id="futbol">
+        <h2 class="titulo-seccion">Línea Fútbol</h2>
+        <div class="contenedor-productos">
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/predator.png" alt="Predator">
+                    <div class="info">
+                        <h3>Adidas Predator</h3>
+                        <p>Precisión y control total.</p>
+                        <p class="codigo">codigo: 2010</p>
+                    </div>
+                </a>
+            </div>
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/f50.webp" alt="F50">
+                    <div class="info">
+                        <h3>Adidas F50</h3>
+                        <p>Velocidad pura en el campo.</p>
+                        <p class="codigo">codigo: 2020</p>
+                    </div>
+                </a>
+            </div>
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/copa.png" alt="Copa">
+                    <div class="info">
+                        <h3>Adidas Copa</h3>
+                        <p>El toque clásico del cuero.</p>
+                        <p class="codigo">codigo: 2030</p>
+                    </div>
+                </a>
+            </div>
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/x.jpeg" alt="X Speedportal">
+                    <div class="info">
+                        <h3>X Speedportal</h3>
+                        <p>Aceleración de otro planeta.</p>
+                        <p class="codigo">codigo: 2040</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <hr class="separador">
+
+    <!-- SECCIÓN CASUAL -->
+    <section id="casual">
+        <h2 class="titulo-seccion">Línea Casual</h2>
+        <div class="contenedor-productos">
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/Samba.PNG" alt="Samba">
+                    <div class="info">
+                        <h3>Adidas Samba</h3>
+                        <p>El icono de las calles.</p>
+                        <p class="codigo">codigo: 4010</p>
+                    </div>
+                </a>
+            </div>
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/superstar.PNG" alt="Adidas Superstar">
+                    <div class="info">
+                        <h3>Adidas Superstar</h3>
+                        <p>Estilo urbano legendario.</p>
+                        <p class="codigo">codigo: 4020</p>
+                    </div>
+                </a>
+            </div>
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/gazelle.jpeg" alt="Gazelle">
+                    <div class="info">
+                        <h3>Adidas Gazelle</h3>
+                        <p>Elegancia clásica en gamuza.</p>
+                        <p class="codigo">codigo: 4030</p>
+                    </div>
+                </a>
+            </div>
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/campus.jpeg" alt="Campus">
+                    <div class="info">
+                        <h3>Adidas Campus</h3>
+                        <p>Cultura skate y estilo retro.</p>
+                        <p class="codigo">codigo: 4040</p>
+                    </div>
+                </a>
+            </div>
+            <div class="producto">
+                <a href="registros.html" class="tarjeta-link">
+                    <img src="img/forum.jpeg" alt="Forum Low">
+                    <div class="info">
+                        <h3>Adidas Forum Low</h3>
+                        <p>Inspiración de las canchas.</p>
+                        <p class="codigo">codigo: 4050</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="index.html" class="volver-inicio">← VOLVER AL INICIO</a>
+    </footer>
+
+    <!-- SCRIPT PARA EL MENÚ HAMBURGUESA -->
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('is-active');
+        });
+
+        // Cierra el menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-right a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
