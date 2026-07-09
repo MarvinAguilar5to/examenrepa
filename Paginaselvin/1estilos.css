@@ -1,81 +1,214 @@
-    /* 1. FONDO Y ESTRUCTURA */
-body {
-    margin: 0;
-    font-family: sans-serif;
-    background: linear-gradient(#000c, #000c), url('fondo.png') center/cover fixed;
-    color: white;
-    text-align: center;
+/* ==========================================================================
+   CONFIGURACIÓN GENERAL (DISEÑO PANTALLA COMPLETA ROJO NEÓN)
+   ========================================================================== */
+:root {
+    --color-background: #000000;
+    --color-neon-primary: #ff0000; 
+    --color-text-light: #ffffff;
+    --color-text-muted: #aaaaaa;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* 2. BOTÓN INICIO (Arriba a la izquierda como en la foto) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-text-light);
+    background-color: var(--color-background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* 1. FONDO HEREDADO DEL INDEX */
+.bg-textured-motorcycle {
+    /* Aquí integras el mismo fondo que usas en el index principal */
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('fondo.png') center/cover fixed;
+}
+
+/* 2. BOTÓN INICIO STICKY */
 .btn-volver-inicio {
-    position: fixed; /* Para que siempre esté visible al bajar */
-    top: 20px;
-    left: 20px;
-    background: #fff;
-    color: #000;
-    padding: 10px 20px;
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    background: #111111;
+    color: var(--color-text-light);
+    padding: 12px 24px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    border: 1px solid #333333;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
     z-index: 1000;
 }
-/* 3. TÍTULO KICK ZONE */
-h1 {
-    margin-top: 80px;
-    color: #0ef10e;
-    font-size: 3.5rem;
-    text-transform: uppercase;
-    letter-spacing: 6px;
-}
-/* 4. CONTENEDOR DE TARJETAS */
-.contenedor-marcas {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 40px;
-}
-/* 5. TARJETAS (ESTILO TICKET) */
-.cuadro {
-    width: 260px;
-    height: 430px;
-    border: 1px solid #00ff00;
-    border-radius: 50px;
-    overflow: hidden;
-    background-color: #fff; /* Fondo blanco para que el logo resalte */
-    background-size: 80%; /* Ajusta el logo para que no se acerque a los bordes */
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: 0.4s;
-    position: relative;
+
+.btn-volver-inicio:hover {
+    border-color: var(--color-neon-primary);
+    color: var(--color-neon-primary);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    transform: translateY(-2px);
 }
 
-.cuadro a {
-    display: block; /* Ocupa todo el espacio */
+/* 3. ENCABEZADO */
+.header-marcas {
+    text-align: center;
+    padding: 60px 20px 20px 20px;
+    z-index: 10;
+}
+
+.header-marcas h1 {
+    color: var(--color-text-light);
+    font-size: 3.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin-bottom: 5px;
+}
+
+.header-marcas .subtitulo {
+    color: var(--color-neon-primary);
+    font-size: 1rem;
+    letter-spacing: 4px;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* 4. NUEVO CONTENEDOR SPLIT (RELLENA TODA LA PÁGINA) */
+.contenedor-marcas-full {
+    display: flex;
+    flex: 1; /* Ocupa todo el espacio vertical restante */
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+    gap: 30px;
+}
+
+/* 5. DISEÑO DE PANELES GRANDES */
+.cuadro-full {
+    flex: 1;
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    border: 2px solid #222222;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Capa oscura interna por defecto */
+.cuadro-full::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 30%, rgba(0, 0, 0, 0.4));
+    transition: all 0.5s ease;
+    z-index: 1;
+}
+
+.cuadro-full a {
+    display: flex;
     width: 100%;
     height: 100%;
     text-decoration: none;
-}
-/* 6. EFECTO HOVER */
-.cuadro span {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    color: #00ff37;
-    padding: 15px 0;
-    transform: translateY(100%);
-    transition: 0.4s;
-}
-.cuadro:hover span {
-    transform: translateY(0);
+    color: inherit;
+    align-items: flex-end; /* Coloca el texto abajo */
+    padding: 40px;
+    z-index: 2;
+    position: relative;
 }
 
-/* 7. ASIGNACIÓN DE IMÁGENES */
-.marca-adidas { background-image: url('adidas.png'); }
-.marca-nike { background-image: url('Nike.png'); }
-.marca-puma { background-image: url('puma1.png'); }
-.marca-nb { background-image: url('NW.png'); }
+/* Contenido del Panel */
+.contenido-cuadro {
+    z-index: 3;
+    width: 100%;
+    text-align: left;
+}
+
+.contenido-cuadro h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: var(--color-text-light);
+    transition: color 0.3s ease;
+}
+
+.contenido-cuadro p {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    max-width: 400px;
+    transition: color 0.3s ease;
+}
+
+/* Botón indicador visual */
+.btn-accion {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.4s ease;
+}
+
+/* 6. EFECTOS HOVER DINÁMICOS */
+.cuadro-full:hover {
+    border-color: var(--color-neon-primary);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+/* Al pasar el mouse, el fondo se aclara ligeramente */
+.cuadro-full:hover::before {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 40%, rgba(0, 0, 0, 0.2));
+}
+
+.cuadro-full:hover .contenido-cuadro h2 {
+    color: var(--color-neon-primary);
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.cuadro-full:hover .contenido-cuadro p {
+    color: var(--color-text-light);
+}
+
+.cuadro-full:hover .btn-accion {
+    border-color: var(--color-neon-primary);
+    background: var(--color-neon-primary);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+/* 7. ENLACE DE IMÁGENES DE FONDO */
+.seccion-cascos { background-image: url('img/cascos.jpeg'); }
+.seccion-trajes { background-image: url('img/trajes.jpeg'); }
+
+/* RESPONSIVE: En celulares se apilan verticalmente */
+@media (max-width: 768px) {
+    .contenedor-marcas-full {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+    .cuadro-full {
+        height: 350px;
+    }
+    .header-marcas h1 {
+        font-size: 2.5rem;
+    }
+}

@@ -23,14 +23,22 @@ body {
     color: var(--color-text-light);
     font-family: var(--font-main);
     overflow-x: hidden;
+    /* CORRECCIÓN: Fuerza al body a tener la altura mínima de la ventana */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Imagen de fondo texturizada */
+/* Imagen de fondo texturizada CORREGIDA */
 .bg-textured-motorcycle {
-    background-image: url('image_0.png');
-    background-repeat: repeat; /* Para que la textura se repita uniformemente */
-    background-attachment: fixed; /* Mantiene el fondo quieto al hacer scroll */
-    background-position: center;
+    background-image: url('img/fondo.jpeg');
+    background-repeat: no-repeat; 
+    background-size: cover; /* CORRECCIÓN: Estira la imagen para cubrir toda la pantalla */
+    background-attachment: fixed; /* Mantiene el fondo estático al hacer scroll */
+    background-position: center center; /* Centra la imagen en los dos ejes */
+    width: 100%;
+    min-height: 100vh; /* CORRECCIÓN: Obliga a la textura a rellenar toda la página */
+    flex: 1;
 }
 
 /* Superposición para el contenido principal (mejor legibilidad) */
@@ -46,7 +54,7 @@ body {
 }
 
 /* ==========================================================================
-   2. NAVBAR / ENCABEZADO (ACTUALIZADO)
+   2. NAVBAR / ENCABEZADO
    ========================================================================== */
 .navbar {
     background-color: var(--color-navbar-bg) !important;
@@ -85,10 +93,10 @@ body {
 }
 
 /* ==========================================================================
-   3. HERO SECTION (BIENVENIDA - TOTALMENTE NUEVO)
+   3. HERO SECTION (BIENVENIDA)
    ========================================================================== */
 .hero-motorcycle {
-    height: 85vh; /* Un poco más alto para impacto */
+    height: 85vh; /* Altura de impacto visual */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,7 +107,7 @@ body {
 }
 
 .hero-motorcycle .hero-content h1 {
-    font-size: 4rem; /* Más grande y dramático */
+    font-size: 4rem; 
     font-weight: 900;
     letter-spacing: 3px;
     margin-bottom: 20px;
@@ -118,7 +126,7 @@ body {
 }
 
 /* ==========================================================================
-   4. BOTONES DEL SITIO (ESTILO NEÓN ACTUALIZADO)
+   4. BOTONES DEL SITIO (ESTILO NEÓN)
    ========================================================================== */
 .btn-main {
     display: inline-block;
@@ -149,7 +157,7 @@ body {
 }
 
 /* ==========================================================================
-   5. SECCIÓN DE PRODUCTOS Y NUEVAS CATEGORÍAS (ACTUALIZADO)
+   5. SECCIÓN DE PRODUCTOS Y CATEGORÍAS
    ========================================================================== */
 .titulo-seccion {
     font-size: 2.5rem;
@@ -189,9 +197,9 @@ body {
 }
 
 .img-categoria {
-    height: 400px; /* Más alto para un diseño más moderno */
+    height: 400px; /* Diseño alto y moderno */
     object-fit: cover;
-    filter: brightness(0.85) grayscale(20%); /* Ligeramente más oscuro por defecto */
+    filter: brightness(0.85) grayscale(20%); 
     transition: all 0.4s ease;
 }
 
@@ -215,13 +223,13 @@ body {
 }
 
 /* ==========================================================================
-   6. PIE DE PÁGINA (FOOTER - ACTUALIZADO)
-   ========================================================================= */
+   6. PIE DE PÁGINA (FOOTER)
+   ========================================================================== */
 footer {
     background-color: rgba(17, 17, 17, 0.95);
     text-align: center;
     padding: 30px 0;
-    margin-top: 60px;
+    margin-top: auto; /* Mueve el footer al fondo de la pantalla de forma dinámica */
     border-top: 2px solid var(--color-neon-primary);
 }
 
@@ -232,8 +240,8 @@ footer p {
 }
 
 /* ==========================================================================
-   7. RESPONSIVE DESIGN (ADAPTACIÓN A MÓVILES ACTUALIZADO)
-   ========================================================================= */
+   7. RESPONSIVE DESIGN (ADAPTACIÓN A MÓVILES)
+   ========================================================================== */
 @media (max-width: 768px) {
     .navbar {
         padding: 10px 0;
