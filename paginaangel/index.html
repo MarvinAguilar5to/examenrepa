@@ -8,6 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
+        /* ==========================================================================
+           1. CONFIGURACIÓN GENERAL Y VARIABLES (ESTILO DE TU AMIGO FUSIONADO)
+           ========================================================================== */
+        :root {
+            --color-background: #0d0d0d;
+            --color-neon-primary: #0ef10e; /* Verde neón unificado */
+            --color-neon-secondary: #00ffff; /* Cian neón */
+            --color-text-light: #ffffff;
+            --color-text-muted: #aaaaaa;
+            --color-card-bg: #111111;
+            --color-navbar-bg: rgba(17, 17, 17, 0.95);
+            --font-main: Arial, sans-serif;
+        }
+
         /* --- PANTALLA DE BIENVENIDA --- */
         .intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -15,202 +29,333 @@
             align-items: center; z-index: 2000;
             animation: fadeOut 0.8s forwards 1.8s;
         }
-        .intro-overlay h1 { color: #00d9ff; font-size: 4rem; letter-spacing: 10px; text-transform: uppercase; }
+        .intro-overlay h1 { color: var(--color-neon-secondary); font-size: 4rem; letter-spacing: 10px; text-transform: uppercase; text-shadow: 0 0 20px var(--color-neon-secondary); }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
-        /* --- ESTILOS GENERALES --- */
-        body { margin: 0; font-family: Arial, sans-serif; background-color: #000; color: white; overflow-x: hidden; scroll-behavior: smooth; }
+        /* --- ESTILOS GENERALES Y TEXTURA --- */
+        body { 
+            margin: 0; 
+            font-family: var(--font-main); 
+            background-color: var(--color-background); 
+            color: var(--color-text-light); 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+            /* Aplicación de la textura del fondo de tu amigo */
+            background-image: url('img/fondo.jpeg');
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
 
-        /* --- NAVBAR BOOTSTRAP CORREGIDA --- */
+        /* Superposición para mejorar legibilidad del texto sobre el fondo textured */
+        .content-overlay {
+            background-color: rgba(0, 0, 0, 0.65);
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           2. NAVBAR / ENCABEZADO (CON EFECTO DESENFOQUE BLUR)
+           ========================================================================== */
         .navbar-custom {
-            background-color: #000 !important;
-            border-bottom: 2px solid #00d9ff;
+            background-color: var(--color-navbar-bg) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--color-neon-primary);
             padding: 15px 0;
         }
         
-        /* Color de los enlaces */
         .navbar-custom .nav-link {
-            color: #00d9ff !important;
-            font-weight: bold;
+            color: var(--color-text-light) !important;
+            font-weight: 600;
             text-transform: uppercase;
-            font-size: 14px;
-            padding: 10px 20px !important;
-            transition: 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            padding: 8px 20px !important;
+            transition: all 0.3s ease;
         }
         
-        .navbar-custom .nav-link:hover {
-            background: #004a57;
-            color: white !important;
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: var(--color-neon-primary) !important;
+            text-shadow: 0 0 8px var(--color-neon-primary);
+            background: transparent !important;
         }
 
-        /* Botón de hamburguesa personalizado en cyan */
+        /* Hamburguesa responsiva adaptada */
         .navbar-custom .navbar-toggler {
-            border-color: #00d9ff;
+            border-color: var(--color-neon-primary);
             margin-right: 15px;
         }
         .navbar-custom .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%2300d9ff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%230ef10e' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
         }
 
-        /* --- ENCABEZADO PRINCIPAL --- */
-        .header-sasa {
-            margin-top: 130px;
+        /* ==========================================================================
+           3. HERO SECTION (ENCABEZADO DE BIENVENIDA)
+           ========================================================================== */
+        .hero-motorcycle {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-        }
-        .header-sasa h1 {
-            color: #00d9ff;
-            font-size: 5rem;
-            letter-spacing: 15px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        .header-sasa p {
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            color: #aaa;
-            text-transform: uppercase;
+            padding: 0 20px;
+            margin-top: 70px;
+            position: relative;
         }
 
-        /* --- CUADRÍCULA DE CATEGORÍAS (SIN FOTOS DE MOTOS) --- */
+        .hero-motorcycle .hero-content h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px var(--color-neon-secondary);
+            line-height: 1.1;
+        }
+
+        .hero-motorcycle .hero-content p {
+            font-size: 1.3rem;
+            color: var(--color-text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ==========================================================================
+           4. SECCIÓN DE APARTADOS (FONDOS LIMPIOS CON EFECTO FLOTANTE NEÓN)
+           ========================================================================== */
         .grid-categorias { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
             gap: 30px; 
-            padding: 50px 40px; 
-            max-width: 1300px; 
+            padding: 40px; 
+            max-width: 1200px; 
             margin: 0 auto; 
         }
 
         .card-categoria { 
-            background: #0d0d0d; 
-            border: 2px solid #1a1a1a; 
+            background-color: var(--color-card-bg) !important;
             border-radius: 20px; 
-            padding: 70px 30px; 
-            transition: 0.4s; 
+            padding: 60px 30px; 
+            transition: all 0.4s ease; 
             text-decoration: none; 
-            color: white;
+            color: var(--color-text-light);
             display: block;
             text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid transparent;
         }
         
+        /* Efecto flotante y brillo neón al pasar el mouse solicitado del CSS de tu amigo */
         .card-categoria:hover { 
-            border-color: #00d9ff; 
-            background: #111;
-            transform: translateY(-10px); 
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 255, 0, 0.25), 0 0 15px var(--color-neon-primary);
+            border: 1px solid var(--color-neon-primary);
         }
 
         .card-categoria h3 { 
-            margin-bottom: 20px; 
+            margin-bottom: 15px; 
             text-transform: uppercase; 
-            letter-spacing: 3px; 
-            font-size: 2rem; 
-            color: #00d9ff;
+            letter-spacing: 2px; 
+            font-size: 1.8rem; 
+            color: var(--color-text-light);
             font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .card-categoria:hover h3 {
+            color: var(--color-neon-primary);
+            text-shadow: 0 0 10px var(--color-neon-primary);
         }
 
         .card-categoria p {
             margin: 0;
-            color: #ccc;
-            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            font-size: 1rem;
             line-height: 1.6;
         }
 
-        /* --- SECCIÓN DESTACADO (MT-09) --- */
-        section { padding: 80px 20px; border-bottom: 2px solid #00d9ff; }
+        /* ==========================================================================
+           5. SECCIÓN DESTACADO (MT-09 ESTILIZADA)
+           ========================================================================== */
+        section { padding: 80px 20px; border-bottom: 2px solid var(--color-neon-primary); }
+        
+        .titulo-seccion {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .titulo-seccion span {
+            color: var(--color-neon-primary);
+            text-shadow: 0 0 15px var(--color-neon-primary);
+        }
+
         .caja-especial { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; }
-        .caja-especial img { width: 45%; min-width: 300px; border: 1px solid #333; }
+        .caja-especial img { width: 45%; min-width: 300px; border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .info-especial { width: 45%; min-width: 300px; text-align: left; }
         .tabla-datos { width: 100%; border-collapse: collapse; }
-        .tabla-datos td { padding: 12px 0; border-bottom: 1px solid #222; color: white; }
-        .tabla-datos .label { color: #00d9ff; font-weight: bold; width: 120px; }
+        .tabla-datos td { padding: 12px 0; border-bottom: 1px solid #222; color: var(--color-text-light); }
+        .tabla-datos .label { color: var(--color-neon-secondary); font-weight: bold; width: 120px; }
 
-        /* --- FORMULARIO DE COMPRA --- */
-        .card-compra { background: #111; max-width: 600px; margin: 0 auto; padding: 40px; border: 1px solid #00d9ff; border-radius: 8px; text-align: left; }
-        input, textarea { width: 100%; padding: 12px; margin: 5px 0 15px 0; background: #222; border: 1px solid #444; color: white; box-sizing: border-box; }
-        
-        .btn-enviar { 
-            width: 100%; padding: 18px; background: #00d9ff; color: black; border: none; 
-            font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; 
+        /* ==========================================================================
+           6. FORMULARIO VERDE DE RESERVA (INTEGRADO REPOSICIONADO)
+           ========================================================================== */
+        .card-compra {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid #333;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
-        .btn-enviar:hover { background: #fff; transform: translateY(-2px); }
+
+        .card-compra form { display: grid; gap: 15px; }
+        .card-compra label { color: var(--color-neon-primary); font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        .card-compra input, .card-compra textarea {
+            background: #111;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .card-compra button {
+            background: var(--color-neon-primary);
+            color: #000;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .card-compra button:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 0 15px var(--color-neon-primary); }
+
+        /* ==========================================================================
+           7. RESPONSIVE DESIGN (ADAPTACIÓN AUTOMÁTICA)
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .hero-motorcycle .hero-content h1 {
+                font-size: 2.8rem;
+                letter-spacing: 6px;
+            }
+            .hero-motorcycle .hero-content p {
+                font-size: 1rem;
+            }
+            .titulo-seccion {
+                font-size: 2rem;
+            }
+            .grid-categorias {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="intro-overlay"><h1>S.A.S.A</h1></div>
+    <div class="content-overlay">
 
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
-          <ul class="navbar-nav mb-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#inicio">Principal</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#especial">Destacado</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#compra">Compra</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+        <div class="intro-overlay"><h1>S.A.S.A nuevo</h1></div>
 
-    <header id="inicio" class="header-sasa">
-        <h1>S.A.S.A</h1>
-        <p>Potencia pura y elegancia sin límites</p>
-    </header>
+        <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+              <ul class="navbar-nav mb-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="#inicio">Principal</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#especial">Destacado</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#compra">Compra</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
 
-    <main class="grid-categorias">
-        <a href="alta.html" class="card-categoria">
-            <h3>Alta Cilindrada</h3>
-            <p>Explora motocicletas de máxima potencia, velocidad e ingeniería avanzada.</p>
-        </a>
+        <header id="inicio" class="hero-motorcycle">
+            <div class="hero-content">
+                <h1>S.A.S.A</h1>
+                <p>Potencia pura y elegancia sin límites</p>
+            </div>
+        </header>
 
-        <a href="media.html" class="card-categoria">
-            <h3>Media Cilindrada</h3>
-            <p>El equilibrio perfecto entre rendimiento diario y adrenalina en carretera.</p>
-        </a>
+        <main class="grid-categorias">
+            <a href="alta.html" class="card-categoria">
+                <h3>Alta Cilindrada</h3>
+                <p>Explora motocicletas de máxima potencia, velocidad e ingeniería avanzada.</p>
+            </a>
 
-        <a href="baja.html" class="card-categoria">
-            <h3>Baja Cilindrada</h3>
-            <p>Agilidad, eficiencia y diseño premium para dominar la ciudad.</p>
-        </a>
-    </main>
+            <a href="media.html" class="card-categoria">
+                <h3>Media Cilindrada</h3>
+                <p>El equilibrio perfecto entre rendimiento diario y adrenalina en carretera.</p>
+            </a>
 
-    <section id="especial">
-        <div class="caja-especial">
-            <img src="img/primera.png" alt="MT-09">
-            <div class="info-especial">
-                <h3 style="color:#00d9ff; font-size: 2.5rem; margin-top:0;">LA PRIMERA CREACIÓN</h3>
-                <table class="tabla-datos">
-                    <tr><td class="label">MODELO:</td><td>Yamaha MT-09</td></tr>
-                    <tr><td class="label">MOTOR:</td><td>3 cilindros en línea, DOHC, refrigeración líquida</td></tr>
-                    <tr><td class="label">VELOCIDAD:</td><td> 230 km/h</td></tr>
-                    <tr><td class="label">AÑO:</td><td>2021–2024</td></tr>
-                    <tr><td class="label">ESTILO:</td><td>Naked Sport / Hyper Naked</td></tr>
-                </table>
-            </div> 
-        </div>
-    </section>
+            <a href="baja.html" class="card-categoria">
+                <h3>Baja Cilindrada</h3>
+                <p>Agilidad, eficiencia y diseño premium para dominar la ciudad.</p>
+            </a>
+        </main>
 
-    <section id="compra">
-        <div class="card-compra">
-            <h2 style="color:#00d9ff; text-align:center; margin-top:0;">RESERVA TU VEHÍCULO</h2>
-             <form action="https://formspree.io/f/mvzlyawv" method="POST">
-                <input type="text" name="name" placeholder="Nombre Completo" required>
-                <input type="email" name="email" placeholder="Correo Electrónico" required>
-                <textarea name="message" placeholder="¿Qué modelo te interesa?" rows="4" required></textarea>
-                <button type="submit" class="btn-enviar">Enviar Solicitud</button>
-            </form>
-        </div>
-    </section>
+        <section id="especial">
+            <h2 class="titulo-seccion">Nuestra <span>Primera Creación</span></h2>
+            <div class="caja-especial">
+                <img src="img/primera.png" alt="MT-09">
+                <div class="info-especial">
+                    <h3 style="color:var(--color-neon-primary); font-size: 2.2rem; margin-top:0; font-weight: bold;">YAMAHA MT-09</h3>
+                    <table class="tabla-datos">
+                        <tr><td class="label">MODELO:</td><td>Yamaha MT-09</td></tr>
+                        <tr><td class="label">MOTOR:</td><td>3 cilindros en línea, DOHC, refrigeración líquida</td></tr>
+                        <tr><td class="label">VELOCIDAD:</td><td> 230 km/h</td></tr>
+                        <tr><td class="label">AÑO:</td><td>2021–2024</td></tr>
+                        <tr><td class="label">ESTILO:</td><td>Naked Sport / Hyper Naked</td></tr>
+                    </table>
+                </div> 
+            </div>
+        </section>
+
+        <section id="compra">
+            <h2 class="titulo-seccion">Reserva tu <span>Vehículo</span></h2>
+            <div class="card-compra">
+                 <form action="https://formspree.io/f/mqewqqpj" method="POST">
+                    <label>Nombre Completo</label>
+                    <input type="text" name="name" required>
+
+                    <label>Correo Electrónico</label>
+                    <input type="email" name="email" required>
+
+                    <label>¿Qué modelo te interesa reservar?</label>
+                    <textarea name="message" rows="4" placeholder="Escribe el modelo o estilo de motocicleta y te enviaremos información" required></textarea>
+
+                    <button type="submit">Enviar Solicitud</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 S.A.S.A Premium Motors. Todos los derechos reservados.</p>
+        </footer>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
